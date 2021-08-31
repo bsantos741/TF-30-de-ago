@@ -20,16 +20,26 @@ public class Teste {
 		
 		Conexao conexao = new Conexao();
         conexao.abrirConexao();
+        
+        
         Produto crud = new Produto(conexao.getConnection());
         
-        //crud.adicionarNovoProduto("Computador", 6, 1200, "informatica", 2);
+        //crud.adicionarNovoProduto(5, "Lapis", "Escritorio", 7.99, 1, 741); 
 		
-		//crud.consultaEstoqueId(5);
+		//crud.consultaEstoqueId(1);
+        
+        //crud.pesquisarProduto("Livro");
+        
+        //crud.atualizarEstoque(2, 1);
+        
+        
 		
         
         Cliente crud1 = new Cliente(conexao.getConnection());
+        
         //crud1.consultaClienteId(321);
-		//crud1.DeletarClienteId(377);
+		
+        //crud1.DeletarClienteId(377);
 		
         Vendedor crud2 = new Vendedor(conexao.getConnection());
        // crud2.DeletarVendedorId(744);

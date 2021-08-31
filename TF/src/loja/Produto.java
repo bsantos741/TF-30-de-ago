@@ -16,14 +16,14 @@ public class Produto{
 
     }
     //Criar produto
-    public boolean adicionarNovoProduto(String nome, int cod, double preço, String setor, int quantidade){
+    public boolean adicionarNovoProduto(int id , String nome, String categoria, double preco, int quantidade, int CodVendedor ){
         try{
             Statement statement = this.conexao.createStatement();
-            statement.executeUpdate("INSERT INTO Produto VALUES("+cod+", '"+nome+"', '"+setor+"', "+preço+", "+quantidade+")");
+            statement.executeUpdate("INSERT INTO Produto VALUES("+id+", '"+nome+"', '"+categoria+"', "+preco+", "+quantidade+" , "+CodVendedor+")");
             
-            System.out.println(nome+" - "+cod+ "adicionado(a)");
+            System.out.println("O produto "+nome+" - de ID: "+id+" adicionado(a)");
             return true;
-            
+           
         }catch(SQLException e){
             return false;
         }
@@ -36,10 +36,10 @@ public class Produto{
             while (rs.next()) {
                 Integer codigo = rs.getInt("idproduto");
                 String nome = rs.getString("nmproduto");
-                Integer estoque = rs.getInt("Qnt.Estoque");
+                Integer estoque = rs.getInt("qntestoque");
                 Integer preco = rs.getInt("pcproduto");
                 
-                System.out.println( "O id "+codigo +" pertence ao produto "+nome+"| R$"+preco+"| Estoque: "+estoque);
+                System.out.println( "O id "+codigo +" pertence ao produto "+nome+"| R$ "+preco+"| Estoque: "+estoque);
             }
             
             return true;
@@ -57,7 +57,7 @@ public class Produto{
                 String preco = rs.getString("pcproduto");
 
                 
-                System.out.println(nome+"| R$"+preco);
+                System.out.println("Encontrado o(s) produto(s): "+nome+"| R$"+preco);
                 
                     
             }
@@ -69,12 +69,18 @@ public class Produto{
         }
     }
     
-    public boolean atualizarQuantidade(int novaQuantidade, int id, String nome){
+    public boolean atualizarEstoque(int novaQuantidade, int id){
         try{
             Statement statement = this.conexao.createStatement();
             statement.executeUpdate("UPDATE Produto SET QntEstoque ="+novaQuantidade+" WHERE idproduto ="+id+"");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Produto WHERE idproduto ="+id);
             
-            System.out.println("A quantidade do produto" +nome+ "cod" +id+" foi alterada para "+novaQuantidade+"");
+            while (rs.next()) {
+                String nome = rs.getString("nmproduto");
+                
+            
+            System.out.println("A quantidade do produto "+nome+ "| cod " +id+" foi alterada para "+novaQuantidade+" unidades");
+            }
             return true;
             
         }catch(SQLException e){
