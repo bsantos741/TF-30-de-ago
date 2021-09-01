@@ -51,6 +51,35 @@ public class Vendedor {
             return false;
         }
     }
+    public boolean consultarFaturamento(){
+        try{
+            Statement statement = this.conexao.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT idvendedor as Id, nmvendedor as Nome, categoria as Categoria,  \n" + 
+            		"count(*) as ProdutosCadastrados, total (pcproduto*qntestoque) as Faturamento\n" + 
+            		"FROM Produto, Vendedor\n" + 
+            		"WHERE idvendedor = codVendedor\n" + 
+            		"GROUP by idvendedor;");
+            
+            System.out.println("O Faturamento de todos vendedores distribuido por ID e categoria são: \n ");
+           
+            while (rs.next()) {
+                Integer codigo = rs.getInt("Id");
+                String nome = rs.getString("Nome");
+                String categoria = rs.getString("Categoria");
+                Integer cadastrados = rs.getInt("ProdutosCadastrados");
+                Double preco = rs.getDouble("Faturamento");
+                
+                //System.out.println("O Faturamento de todos vendedores distribuido por ID e categoria são:");
+                System.out.println("|Id: "+codigo+"| Nome do Vendedor: "+nome+" | Categoria: "+categoria+" | Produtos Cadastrados: "+cadastrados+" | R$ Faturamento Total: "+preco+" | \n");
+                
+                	
+            }
+            
+            return true;
+        }catch(SQLException e){
+            return false;
+        }
+    }
     
     }
     

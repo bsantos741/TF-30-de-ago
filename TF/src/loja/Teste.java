@@ -54,7 +54,7 @@ public class Teste {
         
         //crud2.consultarEmaildoVendedor("aluno@aufc.com");
         
-        //crud2.consultarFaturamentoDoVendedor();
+        crud2.consultarFaturamento();
 		
 		
 		
