@@ -86,5 +86,16 @@ public class Produto{
         }catch(SQLException e){
             return false;
         }
-    } 
+    }
+    public boolean removerProduto(int id, String nome){
+        try{
+            Statement statement = this.conexao.createStatement();
+            statement.executeUpdate("DELETE FROM Produto WHERE idproduto ="+id+"");
+            
+            System.out.println(nome+" "+id+" foi removido");
+            return true;
+        }catch(SQLException e){
+            return false;
+        }
+    }
     }

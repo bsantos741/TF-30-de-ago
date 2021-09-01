@@ -31,15 +31,20 @@ public class Teste {
         //crud.pesquisarProduto("Livro");
         
         //crud.atualizarEstoque(2, 1);
-        //a
+        
+        //crud.removerProduto(7, "Lapiseira");
         
 		
         
         Cliente crud1 = new Cliente(conexao.getConnection());
         
-        //crud1.consultaClienteId(321);
+        //crud1.adicionarNovoCliente(11, "Dandara", "555555555", "Avenida Juazaeiro", "pix");
+        
+        //crud1.consultaClienteId(7);
+        
+        //crud1.Efetuarcompra(11, 1);
 		
-        //crud1.DeletarClienteId(377);
+        //crud1.DeletarClienteId(10);
 		
         Vendedor crud2 = new Vendedor(conexao.getConnection());
        // crud2.DeletarVendedorId(744);

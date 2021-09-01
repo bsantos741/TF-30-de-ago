@@ -21,12 +21,12 @@ public class Cliente
 
     }
 
-public boolean adicionarNovoCliente(String nome, int id, String endereco, String tp, int cpf){
+public boolean adicionarNovoCliente(int id, String nome, String cpf, String endereco, String tipopagamento){
         try{
             Statement statement = this.conexao.createStatement();
-            statement.executeUpdate("INSERT INTO Cliente VALUES("+id+", '"+nome+"', "+cpf+", '"+endereco+"', '"+tp+"')");
+            statement.executeUpdate("INSERT INTO Cliente VALUES("+id+", '"+nome+"', '"+cpf+"' , '"+endereco+"', '"+tipopagamento+"')");
             
-            System.out.println("nome: "+nome+" - cpf:"+cpf+ "adicionado(a)");
+            System.out.println("O cliente  "+nome+" - cpf: "+cpf+ " foi adicionado(a)!");
             return true;
             
         }catch(SQLException e){
@@ -54,28 +54,34 @@ public boolean consultaClienteId(int id){
     }
 }
  
-        public boolean Efetuarpagamento (String tp,String Cliente){
-        try {
-            Statement statement = this.conexao.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Cliente WHERE nmcliente LIKE '%"+tp+"%'");
-            while (rs.next()) {
-                String nome = rs.getString ("nmcliente");
-                //String tp = rs.getString("tipodepagamento");
-                //int id = rs.getString ("idcliente");
-                //
-
+        public boolean Efetuarcompra(int IDcliente,int IDproduto){
+        	try{
+                Statement statement = this.conexao.createStatement();
+                statement.executeUpdate("INSERT INTO ClienteProduto VALUES("+IDcliente+" , "+IDproduto+")");
                 
-                System.out.println(nome+"| R$"+tp);
-                //"|"+id 
+                ResultSet rs = statement.executeQuery("SELECT cliente.idcliente , cliente.nmcliente , produto.idproduto, produto.nmproduto, produto.pcproduto \n" + 
+                		"FROM Cliente, Produto, ClienteProduto\n" + 
+                		"WHERE cliente.idcliente = ClienteProduto.codcliente AND Produto.idproduto = ClienteProduto.codproduto AND cliente.idcliente = "+IDcliente+" AND "+IDproduto+" = produto.idproduto");                                   
+                
+                while (rs.next()) {
+                    Integer codigocliente = rs.getInt("idcliente");
+                    String nomecliente = rs.getString("nmcliente");
+                    Integer codigoproduto = rs.getInt("idproduto");
+                    String nomeproduto = rs.getString("nmproduto");
+                    Double preco = rs.getDouble("pcproduto");
                     
+                    System.out.println("Compra realizada com sucesso!");
+                    System.out.println("IdCliente: "+codigocliente+" | NomeCliente: "+nomecliente+" |IdProduto: "+codigoproduto+" |NomeProduto: "+nomeproduto+" | Preço: R$ "+preco);
+                }
+                
+                
+                return true;
+               
+            }catch(SQLException e){
+                return false;
             }
-            return true;
-            
-        }catch (SQLException e) {
-            //throw new RuntimeException(e);
-            return false;
         }
-}
+
         public boolean DeletarClienteId(int id){
             try{
             	Statement statement = this.conexao.createStatement();
