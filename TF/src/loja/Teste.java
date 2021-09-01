@@ -54,11 +54,11 @@ public class Teste {
         
         //crud2.consultarEmaildoVendedor("aluno@aufc.com");
         
-        crud2.consultarFaturamento();
+        //crud2.consultarFaturamento();
 		
 		
 		
-		
+        conexao.fecharConexao();
 		
 	}
 }
