@@ -42,14 +42,19 @@ public class Teste {
         
         //crud1.consultaClienteId(7);
         
-        //crud1.Efetuarcompra(11, 1);
+        //crud1.efetuarCompra(11, 1);
 		
-        //crud1.DeletarClienteId(10);
+        //crud1.deletarClienteId(10);
 		
         Vendedor crud2 = new Vendedor(conexao.getConnection());
-       // crud2.DeletarVendedorId(744);
-		//crud2.ConsultarEmaildoVendedor("LeeSolar@gmail.com");
-		
+        
+        //crud2.adicionarVendedor(744, "Nome", "aluno@aufc.com");
+        
+        //crud2.deletarVendedorId(744);
+        
+        //crud2.consultarEmaildoVendedor("aluno@aufc.com");
+        
+        //crud2.consultarFaturamentoDoVendedor();
 		
 		
 		

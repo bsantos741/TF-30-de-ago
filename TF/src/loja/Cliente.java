@@ -54,7 +54,7 @@ public boolean consultaClienteId(int id){
     }
 }
  
-        public boolean Efetuarcompra(int IDcliente,int IDproduto){
+        public boolean efetuarCompra(int IDcliente,int IDproduto){
         	try{
                 Statement statement = this.conexao.createStatement();
                 statement.executeUpdate("INSERT INTO ClienteProduto VALUES("+IDcliente+" , "+IDproduto+")");
@@ -82,7 +82,7 @@ public boolean consultaClienteId(int id){
             }
         }
 
-        public boolean DeletarClienteId(int id){
+        public boolean deletarClienteId(int id){
             try{
             	Statement statement = this.conexao.createStatement();
                 statement.executeUpdate("DELETE FROM Cliente WHERE idcliente ="+id+"");

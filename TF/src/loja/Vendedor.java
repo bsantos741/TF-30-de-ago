@@ -10,19 +10,19 @@ public class Vendedor {
     public Vendedor (Connection conexao){
         this.conexao = conexao;
 }
-    public boolean adicionarVendedor( int id, String nome, double faturamento, String email){
+    public boolean adicionarVendedor( int id, String nome, String email){
         try{
             Statement statement = this.conexao.createStatement();
-            statement.executeUpdate("INSERT INTO Produto VALUES("+id+", '"+nome+"', "+faturamento+", '"+email+"')");
+            statement.executeUpdate("INSERT INTO Vendedor VALUES("+id+", '"+nome+"', '"+email+"')");
             
-            System.out.println("Vendedor"+nome+" - id  "+id+ "adicionado(a)");
+            System.out.println("O vendedor "+nome+" - id  "+id+ " foi adicionado(a)");
             return true;
             
         }catch(SQLException e){
             return false;
         }
     }
-    public boolean DeletarVendedorId(int id){
+    public boolean deletarVendedorId(int id){
         try{
             Statement statement = this.conexao.createStatement();
             statement.executeUpdate("DELETE FROM Vendedor WHERE idvendedor ="+id+"");
@@ -33,17 +33,17 @@ public class Vendedor {
             return false;
         }
     }
-    public boolean ConsultarEmaildoVendedor(String email){
+    public boolean consultarEmaildoVendedor(String email){
         try{
             Statement statement = this.conexao.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT FROM Vendedor WHERE email = "+email);
+            ResultSet rs = statement.executeQuery("SELECT * FROM Vendedor WHERE email = '"+email+"'");
 
             while (rs.next()) {
                 Integer codigo = rs.getInt("idvendedor");
                 String nome = rs.getString("nmvendedor");
-                String email2 = rs.getString("email");
+                String mail = rs.getString("email");
 
-                System.out.println("O email "+codigo +" pertence ao vendedor "+nome+"| email: "+email2);
+                System.out.println("O email pertence ao vendedor "+nome+"| Id: "+codigo+" email: "+mail);
             }
 
             return true;
